@@ -59,11 +59,13 @@ export default {
     }
   },
   methods: {
-    login() {
-      console.log(this.loginForm)
+    async login() {
+      await this.$store.dispatch('auth/login', this.loginForm)
+      this.$router.push('/')
     },
-    register() {
-      console.log(this.registerForm)
+    async register() {
+      await this.$store.dispatch('auth/register', this.registerForm)
+      this.$router.push('/')
     }
   }
 }
