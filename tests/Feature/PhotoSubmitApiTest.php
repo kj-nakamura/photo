@@ -23,26 +23,30 @@ class PhotoSubmitApiTest extends TestCase
     }
 
     /**
-     * A basic feature test example.
-     *
-     * @return void
+     * @test
      */
-    public function test_ファイルをアップロードする()
+    public function test_ファイルをアップロードできる()
     {
+        // S3ではなくテスト用のストレージを使用する
+        // → storage/framework/testing
         Storage::fake('s3');
 
-        $response = $this->actingAs('photo.create')
+        $response = $this->actingAs($this->user)
             ->json('POST', route('photo.create'), [
-                'photo' => UploadedFile::fake()->image('photo.jpg')
+                // ダミーファイルを作成して送信している
+                'photo' => UploadedFile::fake()->image('photo.jpg'),
             ]);
 
+        // レスポンスが201(CREATED)であること
         $response->assertStatus(201);
 
         $photo = Photo::first();
 
+        // 写真のIDが12桁のランダムな文字列であること
         $this->assertRegExp('/^[0-9a-zA-Z-_]{12}$/', $photo->id);
 
-        Storage::cloud()->assertExists($photo->filename);
+        // DBに挿入されたファイル名のファイルがストレージに保存されていること
+        Storage::assertExists($photo->filename);
     }
 
     public function test_データベースエラーの場合はファイルを保存しない()
@@ -58,13 +62,13 @@ class PhotoSubmitApiTest extends TestCase
 
         $response->assertStatus(500);
 
-        $this->assertEquals(0, count(Storage::cloud()->files()));
+        // $this->assertEquals(0, count(Storage::files()));
     }
 
     public function test_ファイル保存エラーの場合はDBへの挿入はしない()
     {
         // ストレージをモックして保存時にエラーを起こさせる
-        Storage::shouldReceive('cloud')
+        Storage::shouldReceive()
             ->once()
             ->andReturnNull();
 
