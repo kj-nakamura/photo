@@ -96,7 +96,7 @@ export default {
         timeout: 6000
       })
 
-      this.$router.push("/photos/${response.data.id}");
+      this.$router.push(`(/photos/${response.data.id}`);
     }
   }
 };
