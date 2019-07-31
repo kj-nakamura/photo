@@ -37,8 +37,7 @@ class PhotoListApiTest extends TestCase
                     'name' => $photo->owner->name,
                 ],
             ];
-        })
-            ->all();
+        })->all();
 
         $response->assertStatus(200)
             // レスポンスJSONのdata項目に含まれる要素が5つであること

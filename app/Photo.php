@@ -15,7 +15,9 @@ class Photo extends Model
 
     /** JSONに含める属性 */
     protected $visible = [
-        'id', 'owner', 'url',
+        'id',
+        'owner',
+        'url',
     ];
 
     const ID_LENGTH = 12;
@@ -63,6 +65,6 @@ class Photo extends Model
 
     public function getUrlAttribute()
     {
-        return Storage::url('/storage/app/' . $this->attributes['filename']);
+        return Storage::url($this->attributes['filename']);
     }
 }

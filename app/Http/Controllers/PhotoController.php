@@ -20,7 +20,7 @@ class PhotoController extends Controller
     public function index()
     {
         $photos = Photo::with(['owner'])
-            ->orderBy(Photo::CREATED_AT, 'desc')->pagenate();
+            ->orderBy(Photo::CREATED_AT, 'desc')->paginate();
 
         return $photos;
     }
@@ -43,7 +43,7 @@ class PhotoController extends Controller
 
         // S3にファイルを保存する
         // 第三引数の'public'はファイルを公開状態で保存するため
-        Storage::putFileAs('', $request->photo, $photo->filename, 'public');
+        Storage::putFileAs('/', $request->photo, $photo->filename, 'public');
 
         // データベースエラー時にファイル削除を行うため
         // トランザクションを利用する
