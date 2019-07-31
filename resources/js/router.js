@@ -19,9 +19,9 @@ const routes = [
         component: PhotoList
     },
     {
-        path: '/photos/:id',
-        component: PhotoDetail,
-        props: true
+      path: '/photos/:id',
+      component: PhotoDetail,
+      props: true
     },
     {
       path: '/login',

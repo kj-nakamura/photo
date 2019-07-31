@@ -10,7 +10,7 @@
   export default {
     computed: {
       ...mapState({
-        message: stete => state.message.content
+        message: state => state.message.content
       })
     }
   }

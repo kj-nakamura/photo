@@ -7,7 +7,7 @@
     <form v-show="! loading" class="form" @submit.prevent="submit">
       <div class="errors" v-if="errors">
         <ul v-if="errors.photo">
-          <li v-for="msg in errors.photo" :key="msg">{ msg }</li>
+          <li v-for="msg in errors.photo" :key="msg">{{ msg }}</li>
         </ul>
       </div>
       <input class="form__item" type="file" @change="onFileChange">
@@ -72,9 +72,9 @@ export default {
     async submit() {
       this.loading = true
 
-      const formData = new FormData();
-      formData.append("photo", this.photo);
-      const response = await axios.post("/api/photos", formData);
+      const formData = new FormData()
+      formData.append('photo', this.photo)
+      const response = await axios.post('/api/photos', formData)
 
       this.loading = false
 
@@ -96,7 +96,7 @@ export default {
         timeout: 6000
       })
 
-      this.$router.push("/photos/${response.data.id}");
+      this.$router.push(`/photos/${response.data.id}`)
     }
   }
 };
