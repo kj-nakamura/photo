@@ -18,7 +18,13 @@ class Photo extends Model
         'id',
         'owner',
         'url',
+        'comments',
     ];
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment')->orderBy('id', 'desc');
+    }
 
     const ID_LENGTH = 12;
 
