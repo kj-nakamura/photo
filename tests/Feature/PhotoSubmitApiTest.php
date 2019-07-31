@@ -29,7 +29,7 @@ class PhotoSubmitApiTest extends TestCase
     {
         // S3ではなくテスト用のストレージを使用する
         // → storage/framework/testing
-        Storage::fake('s3');
+        Storage::fake();
 
         $response = $this->actingAs($this->user)
             ->json('POST', route('photo.create'), [
