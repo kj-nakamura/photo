@@ -30,10 +30,10 @@ class PhotoDetailApiTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'id' => $photo->id,
-                'url' => $photo->url,
                 'owner' => [
                     'name' => $photo->owner->name,
                 ],
+                'url' => $photo->url,
                 'comments' => $photo->comments
                     ->sortByDesc('id')
                     ->map(function ($comment) {
@@ -43,8 +43,7 @@ class PhotoDetailApiTest extends TestCase
                             ],
                             'content' => $comment->content,
                         ];
-                    })
-                    ->all(),
+                    })->all(),
             ]);
     }
 }

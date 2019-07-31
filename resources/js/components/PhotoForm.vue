@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import { CREATED, INPROCESSABLE_ENTITY, UNPROCESSABLE_ENTITY } from "../util";
-import Loader from "./Loader.vue";
+import { CREATED, INPROCESSABLE_ENTITY, UNPROCESSABLE_ENTITY } from "../util"
+import Loader from "./Loader.vue"
 
 export default {
   components: {
