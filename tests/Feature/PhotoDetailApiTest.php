@@ -34,6 +34,8 @@ class PhotoDetailApiTest extends TestCase
                     'name' => $photo->owner->name,
                 ],
                 'url' => $photo->url,
+                'liked_byser' => false,
+                'likes_count' => 0,
                 'comments' => $photo->comments
                     ->sortByDesc('id')
                     ->map(function ($comment) {
