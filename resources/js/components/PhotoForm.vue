@@ -7,12 +7,12 @@
     <form v-show="! loading" class="form" @submit.prevent="submit">
       <div class="errors" v-if="errors">
         <ul v-if="errors.photo">
-          <li v-for="msg in errors.photo" :key="msg">{ msg }</li>
+          <li v-for="msg in errors.photo" :key="msg">{{ msg }}</li>
         </ul>
       </div>
-      <input class="form__item" type="file" @change="onFileChange">
+      <input class="form__item" type="file" @change="onFileChange" />
       <output class="form__output" v-if="preview">
-        <img :src="preview" alt>
+        <img :src="preview" alt />
       </output>
       <div class="form__button">
         <button type="submit" class="button button--inverse">submit</button>
@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import { CREATED, INPROCESSABLE_ENTITY, UNPROCESSABLE_ENTITY } from "../util"
-import Loader from "./Loader.vue"
+import { CREATED, INPROCESSABLE_ENTITY, UNPROCESSABLE_ENTITY } from "../util";
+import Loader from "./Loader.vue";
 
 export default {
   components: {
@@ -70,13 +70,13 @@ export default {
       this.$el.querySelector('input[type="file"]').value = null;
     },
     async submit() {
-      this.loading = true
+      this.loading = true;
 
       const formData = new FormData();
       formData.append("photo", this.photo);
       const response = await axios.post("/api/photos", formData);
 
-      this.loading = false
+      this.loading = false;
 
       if (response.status === UNPROCESSABLE_ENTITY) {
         this.errors = response.data.errors;
@@ -91,12 +91,12 @@ export default {
         return false;
       }
 
-      this.$store.commit('message/setContent', {
-        content: '写真が投稿されました',
+      this.$store.commit("message/setContent", {
+        content: "写真が投稿されました",
         timeout: 6000
-      })
+      });
 
-      this.$router.push(`(/photos/${response.data.id}`);
+      this.$router.push(`/photos/${response.data.id}`);
     }
   }
 };
