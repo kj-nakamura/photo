@@ -11,7 +11,8 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.browserSync('photo.com')
+// mix.browserSync('photo.com')
+mix
 .js('resources/js/app.js', 'public/js')
 .sass('resources/sass/app.scss', 'public/css')
 .version()
