@@ -34,7 +34,7 @@ class PhotoDetailApiTest extends TestCase
                     'name' => $photo->owner->name,
                 ],
                 'url' => $photo->url,
-                'liked_byser' => false,
+                'liked_by_user' => false,
                 'likes_count' => 0,
                 'comments' => $photo->comments
                     ->sortByDesc('id')
